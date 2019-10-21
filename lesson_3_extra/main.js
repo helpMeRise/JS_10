@@ -19,16 +19,11 @@ switch (lang) {
     console.log(en);
 }
 
-let arr = {
-  'ru': ru,
-  'en': en
-};
-
-console.log( arr[lang] );
-
+let arr = [ru, en];
+let res = lang == 'ru' ? console.log( arr[0] ) : console.log( arr[1] );
+    
 
 let namePerson = prompt('Имя');
-
 let result = namePerson === 'Артем' ? console.log( 'Директор' ) :
     namePerson === 'Максим' ? console.log( 'Преподаватель' ) :
     console.log( 'Студент' );
