@@ -1,3 +1,4 @@
+'use strict';
 
 let money = 30000,
     income = 'фриланс',
