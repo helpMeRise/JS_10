@@ -51,7 +51,7 @@ let getStatusIncome = function() {
 console.log('getStatusIncome();: ', getStatusIncome());
 
 let getExpensesMonth = function() {
-  return +question2 - +question4;
+  return +question2 + +question4;
 };
 
 let getAccumulatedMonth = function() {
