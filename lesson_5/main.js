@@ -42,21 +42,18 @@ let getExpensesMonth = function() {
   for ( let i = 0; i < 2; i++ ){
     if ( i === 0 ) {
       question1 = prompt('Введите обязательную статью расходов', 'Квартплата');
-      do {
-        check = +prompt('Во сколько это обойдется', 10000);
-      }
-      while ( isNaN(check) || check === '' || check === null );
     }
     if ( i === 1 ){
       question2 = prompt('Введите обязательную статью расходов', 'Еда');
-      do {
-        check = +prompt('Во сколько это обойдется', 10000);
-      }
-      while ( isNaN(check) || check === '' || check === null );
     }
 
+    do {
+      check = prompt('Во сколько это обойдется', 10000);
+    }
+    while ( isNaN(check) || check === '' || check === null || check !== check.trim() );
+
     
-    sum += check; 
+    sum += +check; 
   }
   
   return sum;
