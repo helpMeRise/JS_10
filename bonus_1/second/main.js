@@ -12,7 +12,7 @@ let leap = function(){
       }
     }
   } else {
-    for ( let i = end; i < start; i++ ){
+    for ( let i = end; i <= start; i++ ){
       if ( new Date(i, 1, 29).getMonth() == 1 ){
         console.log(i);
       }
