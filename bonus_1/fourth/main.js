@@ -50,4 +50,3 @@ let game = function(){
 };
 
 game();
-
