@@ -54,6 +54,8 @@ let appData = {
       }
       return sum;
       
+      
+      
   },
     getBudget: function() {
       appData.budgetMonth = money - +appData.getExpensesMonth();
