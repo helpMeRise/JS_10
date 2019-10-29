@@ -147,7 +147,13 @@ console.log(key + ": " + appData[key]);
 }
 
 
-for ( let i = 0; i < appData.addExpenses.length; i++ ){
-  appData.addExpenses[i] = appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].slice(1);
-}
+// for ( let i = 0; i < appData.addExpenses.length; i++ ){
+//   appData.addExpenses[i] = appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].slice(1);
+// }
+
+appData.addExpenses.forEach(function(item, i){
+  item = item[0].toUpperCase() + item.slice(1);
+  appData.addExpenses[i] = item;
+});
+
 console.log(appData.addExpenses.join(', '));
