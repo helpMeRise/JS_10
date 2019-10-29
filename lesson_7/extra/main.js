@@ -1,38 +1,19 @@
 'use strict';
 
-let head = document.createElement('h1'),
-    date = new Date(),
-    hour = date.getHours(),
-    minutes = date.getMinutes(),
-    seconds = date.getSeconds(),
-    day = date.getDate(),
-    month = date.getMonth() + 1,
-    year = date.getFullYear(),
-    myTime = [hour, minutes, seconds],
-    myDate = [day, month, year];
-
-
-let zero = function(){
-  for ( let i = 0; i < myTime.length; i++) {
-    if ( myTime[i] < 10 ) {
-      myTime[i] = '0' + myTime[i];
-    } 
-  }
-  for ( let i = 0; i < myDate.length; i++) {
-    if ( myDate[i] < 10 ) {
-      myDate[i] = '0' + myDate[i];
-    } 
-  }
-};
-
-zero();
-    
-let body = document.querySelector('body');
-
-head.textContent = myTime.join(':') + ' ' + myDate.join(':');
-
-body.appendChild(head);
-
-
+let head = document.createElement('h1');
+setTimeout(function time(){
+  
+  let  date = new Date(),
+    hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
+    minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
+    seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds(),
+    day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+    month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1),
+    year = date.getFullYear();
+  let body = document.querySelector('body');
+  head.textContent = hour + ':' + minutes + ':' + seconds + ' ' + day + ':' + month + ':' + year;
+  body.appendChild(head);
+  setTimeout(time, 1000);
+}, 1000);
 
 
