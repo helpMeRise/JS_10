@@ -17,4 +17,3 @@ let start = document.querySelector('#start'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select');
-    console.log(periodSelect);
