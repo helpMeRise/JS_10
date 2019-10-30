@@ -59,6 +59,21 @@ let appData = {
     appData.getCheckPlaceholder();
     appData.showResult();
   },
+  getCheckPlaceholder: function(){
+
+    inputs.forEach(function(item){
+      if ( item.placeholder === 'Наименование' ){
+        item.addEventListener('input', function(){
+          item.value = item.value.replace(/[^а-яА-ЯёЁ\s.,!()?-]/,'');
+        });
+      }
+      if ( item.placeholder === 'Сумма' ){
+        item.addEventListener('input', function(){
+          item.value = item.value.replace(/[^\d]/,'');
+        });
+      }
+  });
+  },
   showResult: function(){
     budgetMonthValue.value = appData.budgetMonth;
     budgetDayValue.value = Math.ceil(appData.budgetDay);
@@ -98,6 +113,15 @@ let appData = {
   addExpensesBlock: function(){
     
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
+    let expensesChildren = cloneExpensesItem.querySelectorAll('*');
+    
+    for ( let i=0; i < expensesChildren.length; i++){
+      
+      if ( expensesChildren[i].type == 'text') {
+        expensesChildren[i].value = null;
+      }
+    }
+
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
     expensesItems = document.querySelectorAll('.expenses-items');
     if ( expensesItems.length === 3 ){
@@ -107,6 +131,15 @@ let appData = {
   addIncomeBlock: function(){
     
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
+    let incomeChildren = cloneIncomeItem.querySelectorAll('*');
+    
+    for ( let i=0; i < incomeChildren.length; i++){
+      
+      if ( incomeChildren[i].type == 'text') {
+        incomeChildren[i].value = null;
+      }
+    }
+
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
     incomeItems = document.querySelectorAll('.income-items');
     if ( incomeItems.length === 3 ){
@@ -181,7 +214,7 @@ let appData = {
 
 start.addEventListener('click', appData.start);
 
-
+appData.getCheckPlaceholder();
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 
