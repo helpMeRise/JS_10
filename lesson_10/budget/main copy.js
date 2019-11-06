@@ -140,6 +140,7 @@ let appData = {
       if (itemExpenses !== '' && cashExpenses !== ''){
         appData.expenses[itemExpenses] = +cashExpenses;
       }
+
     });
   },
   getIncome: function(){
@@ -149,9 +150,11 @@ let appData = {
       if (itemIncome !== '' && cashIncome !== ''){
         appData.income[itemIncome] = +cashIncome;
       }
+
       for ( let key in appData.income ) {
         appData.incomeMonth += +appData.income[key];
       }
+
     });
   },
   getExpensesMonth: function(){
