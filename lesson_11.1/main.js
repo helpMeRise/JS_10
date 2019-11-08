@@ -5,8 +5,6 @@ const start = document.getElementById('start'),
       button = document.getElementsByTagName('button'),
       incomePlus = button[0],
       expensesPlus = button[1],
-      additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
-      additionalExpensesItem = document.querySelector('.additional_expenses-item'),
       targetAmount = document.querySelector('.target-amount'),
       depositCheck = document.querySelector('#deposit-check'),
       budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
@@ -27,11 +25,16 @@ const start = document.getElementById('start'),
       periodAmountItem = document.querySelector('.period-amount'),
       depositBank = document.querySelector('.deposit-bank'),
       depositAmount = document.querySelector('.deposit-amount'),
-      depositPercent = document.querySelector('.deposit-percent');
+      depositPercent = document.querySelector('.deposit-percent'),
+      additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+      additionalExpensesItem = document.querySelector('.additional_expenses-item');
 
 let inputs = document.querySelectorAll('input'),
   incomeItems = document.querySelectorAll('.income-items'),
   expensesItems = document.querySelectorAll('.expenses-items');
+  
+  
+  
 
 
 const AppData = function(){
@@ -114,17 +117,17 @@ AppData.prototype.getPeriodAmount = function(){
   
 };
 AppData.prototype.addBlock = function(item, button, itemClass){
+  
   let cloneItem = item[0].cloneNode(true);
   let itemChild = cloneItem.querySelectorAll('*');
   
-  for ( let i = 0; i < itemChild.lenght; i++){
-    if (itemChild[i].type == 'text') {
-      itemChild[i].value = null;
-    }
+  for ( let i = 0; i < itemChild.length; i++ ) {
+      itemChild[i].value = '';
   }
-
+   
   item[0].parentNode.insertBefore(cloneItem, button);
   item = document.querySelectorAll(itemClass);
+  
   if (item.length === 3) {
     button.style.display = 'none';
   }
@@ -141,18 +144,18 @@ AppData.prototype.getExpenses = function(){
   });
 };
 AppData.prototype.getIncome = function(){
+  incomeItems = document.querySelectorAll('.income-items');
   incomeItems.forEach((item) => {
     let itemIncome = item.querySelector('.income-title').value;
     let cashIncome = item.querySelector('.income-amount').value;
     if (itemIncome !== '' && cashIncome !== ''){
       this.income[itemIncome] = +cashIncome;
     }
-
-    for ( let key in this.income ) {
-      this.incomeMonth += +this.income[key];
-    }
-
   });
+  for ( let key in this.income ) {
+    this.incomeMonth += +this.income[key];
+    
+  }
 };
 AppData.prototype.getExpensesMonth = function(){
   let sum = 0;
@@ -211,11 +214,12 @@ AppData.prototype.reset = function(){
     reset.style.display = 'none';
     incomePlus.style.display = 'block';
     expensesPlus.style.display = 'block';
-
+    
     inputs.forEach((item) => {
       item.removeAttribute('disabled');
       item.value = '';
       periodSelect.value = 1;
+      
   });
 };
 AppData.prototype.delete = function(){
@@ -223,10 +227,10 @@ AppData.prototype.delete = function(){
   let inc = document.querySelectorAll('.income-items');
   let exp = document.querySelectorAll('.expenses-items');
   for ( let i = 1; i < inc.length; i++ ){
-    inc[i].style.display = 'none';
+    inc[i].remove();
   }
   for ( let i = 1; i < exp.length; i++ ){
-    exp[i].style.display = 'none';
+    exp[i].remove();
   }
 };
 AppData.prototype.getCheckPlaceholder = function(item){

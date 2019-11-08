@@ -112,8 +112,10 @@ class AppData {
     let cloneItem = item[0].cloneNode(true);
     let itemChild = cloneItem.querySelectorAll('*');
     
-    for ( let i = 0; i < itemChild.length; i++ ) {
-      itemChild[i].value = '';
+    for ( let i = 0; i < itemChild.lenght; i++){
+      if (itemChild[i].type == 'text') {
+        itemChild[i].value = null;
+      }
     }
   
     item[0].parentNode.insertBefore(cloneItem, button);
@@ -164,7 +166,6 @@ class AppData {
     return this.budget - this.expensesMonth;
   }
   get(elem, obj){
-    const _this = this;
     if (typeof elem.value === 'string'){
        elem = elem.value.split(',');
         elem.forEach( function(item){
@@ -217,10 +218,10 @@ class AppData {
     let inc = document.querySelectorAll('.income-items');
     let exp = document.querySelectorAll('.expenses-items');
     for ( let i = 1; i < inc.length; i++ ){
-      inc[i].remove();
+      inc[i].style.display = 'none';
     }
     for ( let i = 1; i < exp.length; i++ ){
-      exp[i].remove();
+      exp[i].style.display = 'none';
     }
   }
   getCheckPlaceholder(item){
@@ -274,6 +275,9 @@ class AppData {
     
     this.getPeriodAmount();
   
+    start.addEventListener('click', () => {
+      localStorage.data = data.querySelectorAll('input');
+    }); 
   }
   
 }
