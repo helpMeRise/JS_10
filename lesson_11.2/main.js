@@ -22,7 +22,8 @@ const start = document.getElementById('start'),
       expensesTitle = document.querySelector('.expenses-title'),
       additionalExpenses = document.querySelector('.additional_expenses'),
       periodSelect = document.querySelector('.period-select'),
-      
+      data = document.querySelector('.data'),
+      calc = document.querySelector('.calc'),
       periodAmountItem = document.querySelector('.period-amount'),
       depositBank = document.querySelector('.deposit-bank'),
       depositAmount = document.querySelector('.deposit-amount'),
@@ -30,14 +31,7 @@ const start = document.getElementById('start'),
 
 let inputs = document.querySelectorAll('input'),
     incomeItems = document.querySelectorAll('.income-items'),
-    expensesItems = document.querySelectorAll('.expenses-items'),
-    data = document.querySelector('.data'),
-    result = document.querySelector('.result'),
-    calc = document.querySelector('.calc'),
-    left = data.querySelectorAll('input'),
-    right = result.querySelectorAll('input'),
-    all = calc.querySelectorAll('input');
-    
+    expensesItems = document.querySelectorAll('.expenses-items');
 
 
 class AppData {
@@ -76,13 +70,7 @@ class AppData {
     this.get(additionalIncomeItem, this.addIncome);
     this.getCancel();
     this.getReset();
-    
     this.showResult();
-    this.toLocal();
-    this.setCoockie();
-
-    
-
   }
   showResult(){
     budgetMonthValue.value = this.budgetMonth;
@@ -104,7 +92,6 @@ class AppData {
   getCancel(){
   
     let dataChildren = data.querySelectorAll('*');
-    
     
     for ( let i=0; i < dataChildren.length; i++){
       
@@ -218,8 +205,7 @@ class AppData {
       reset.style.display = 'none';
       incomePlus.style.display = 'block';
       expensesPlus.style.display = 'block';
-      localStorage.clear();
-      this.deleteCookie();
+  
       inputs.forEach((item) => {
         item.removeAttribute('disabled');
         item.value = '';
@@ -289,78 +275,11 @@ class AppData {
     this.getPeriodAmount();
   
   }
-  toLocal(){
-        
-    left.forEach( (item) => {
-      localStorage.setItem(item.className, item.value );
-      
-    } );
-    right.forEach( (item) => {
-      localStorage.setItem(item.className, item.value);
-    });
-  }
-  fromLocal(){
-    left.forEach( (item) => {
-      item.value = localStorage.getItem(item.className);
-      if ( localStorage.getItem(`salary-amount`) !== null ) {
-        item.setAttribute('disabled', '');
-      }
-      
-    });
-    right.forEach( (item) => {
-      item.value = localStorage.getItem(item.className);
-    }); 
-    if ( localStorage.length !== 0 ){
-      reset.style.display = `block`;
-      start.style.display = `none`; 
-    }  
-  }
-  setCoockie(){
-    document.coockie = `isLoad=true`;
-    left.forEach( (item) => {
-      document.cookie = `${item.className}=${item.value}; max-age=360000`;
-    } );
-    right.forEach( (item) => {
-      document.cookie = `${item.className}=${item.value}; max-age=360000`;
-    });
-  }
-  removeCoockie(){
-     all.forEach( (item) => {
-       if (localStorage.getItem(item.className) != appData.getCookie(item.className) &&
-       localStorage.getItem(item.className) !== '' &&  appData.getCookie(item.className) !== ''){
-        console.log(localStorage.getItem(item.className));
-        console.log(appData.getCookie(item.className));
-        appData.reset();
-        appData.deleteCookie();
-       }
-     });
-      setTimeout(appData.removeCoockie, 1000);
-     
-     
-  }
-  deleteCookie () {
-    left.forEach( (item) => {
-      document.cookie = `${item.className}=${item.value}; max-age=-1`;
-      
-    } );
-    right.forEach( (item) => {
-      document.cookie = `${item.className}=${item.value}; max-age=-1`;
-    });
-  }
-  getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : '';
-  }
+  
 }
 
 const appData = new AppData();
 appData.eventsListeners();
-appData.fromLocal();
-setTimeout(appData.removeCoockie, 1000);
-
-
 
 
 
