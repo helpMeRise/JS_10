@@ -38,7 +38,7 @@ let inputs = document.querySelectorAll('input'),
     right = result.querySelectorAll('input'),
     all = calc.querySelectorAll('input');
     
-
+//
 
 class AppData {
   constructor() {
