@@ -1,44 +1,42 @@
-window.addEventListener(`DOMContentLoaded`, function(){
+window.addEventListener(`DOMContentLoaded`, function () {
   'use strict';
 
-  //Timer
-  const countTimer = function(){
+
+  
+  const reRun = function(){
     const timerHours = document.querySelector(`#timer-hours`),
-          timerMinutes = document.querySelector(`#timer-minutes`),
-          timerSeconds = document.querySelector(`#timer-seconds`);
+        timerMinutes = document.querySelector(`#timer-minutes`),
+        timerSeconds = document.querySelector(`#timer-seconds`);
 
-    //Получаем время до дедлайна
-    let  dateNow = new Date(),
-          seconds = 59 - dateNow.getSeconds(),
-          minutes = 59 - dateNow.getMinutes(),
-          hours = 23 - (dateNow.getHours());
-   
+    const tic = setInterval(reRun, 1000);
 
-    const zero = (elem) => { return (elem < 10) ? `0${elem}`: elem;};
-          
-      //Выводим значения на страницу
-      timerHours.textContent = zero(hours);
-      timerMinutes.textContent = zero(minutes);
-      timerSeconds.textContent = zero(seconds);
-      // //Выводим ноли
-      // if (timeRemaining <= 0){
-      //   timerHours.textContent = zero(0);
-      //   timerMinutes.textContent = zero(0);
-      //   timerSeconds.textContent = zero(0);
-      // }
-      
-      
-        
-     
+    let deadline = new Date();
+    deadline.setHours(0, 0, 0);
+
+    let timer = function(){
+      let now = new Date(),
+        time = now - deadline,
+        hours = 23 - Math.floor(((time / 1000) / 60 / 60)),
+        minutes = 59 - Math.floor(((time / 1000) / 60) % 60),
+        seconds = 59 - Math.floor((time / 1000) % 60);
+        return {now, hours, minutes, seconds};
+    };
+    const go = timer();
     
-    //Запускаем и останавливаемтаймер
-  let intervalClock = setInterval(countTimer, 1000);
-  // if ( timeRemaining <= 0 ){
-  //   clearInterval(intervalClock);
-  // }
+      
+    const zero = (elem) => { return (elem < 10) ? `0${elem}`: elem;};
+
+    //Выводим значения на страницу
+    timerHours.textContent = zero(go.hours);
+    timerMinutes.textContent = zero(go.minutes);
+    timerSeconds.textContent = zero(go.seconds);
+
+    if ( deadline === go.now){
+      reRun();
+    }
 
   };
-  
-countTimer();
+
+  reRun();
 
 });

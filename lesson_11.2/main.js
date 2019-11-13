@@ -199,6 +199,14 @@ class AppData {
     this.addIncome.length = 0;
       this.addExpenses.length = 0;
       this.deposit = false;
+      this.budgetMonth = null;
+      this.budget = null;
+      this.budgetDay = null;
+      this.expenses = null;
+      this.expensesMonth = null;
+      this.income = null;
+      this.incomeMonth = null;
+      this.moneyDeposit = 0;
       
       periodAmountItem.textContent = 1;
       start.style.display = 'block';
