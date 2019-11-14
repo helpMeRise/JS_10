@@ -328,8 +328,6 @@ class AppData {
      all.forEach( (item) => {
        if (localStorage.getItem(item.className) != appData.getCookie(item.className) &&
        localStorage.getItem(item.className) !== '' &&  appData.getCookie(item.className) !== ''){
-        console.log(localStorage.getItem(item.className));
-        console.log(appData.getCookie(item.className));
         appData.reset();
         appData.deleteCookie();
        }
