@@ -93,6 +93,7 @@ window.addEventListener(`DOMContentLoaded`, function(){
         counter += 0.05;
         if ( counter > 1 || screen.width <= 768 ){
           cancelAnimationFrame(animate);
+          popup.style.opacity = 1;
         }
         popup.style.display = `block`;
     };
@@ -183,32 +184,30 @@ window.addEventListener(`DOMContentLoaded`, function(){
       }
     };
 
-
-      menuList.forEach( (item) => {
-        switch (item.textContent){
-          //Наши услуги
-          case (`Наши услуги`):
-            item.addEventListener(`click`, (e) => {e.preventDefault(); toService();});
+    menuList.forEach( (item) => {
+      switch (item.textContent){
+        //Наши услуги
+        case (`Наши услуги`):
+          item.addEventListener(`click`, (e) => {e.preventDefault(); toService();});
+          break;
+        //Портфолио
+        case (`Портфолио`):
+            item.addEventListener(`click`, (e) => {e.preventDefault(); toPortfolio();});
             break;
-          //Портфолио
-          case (`Портфолио`):
-              item.addEventListener(`click`, (e) => {e.preventDefault(); toPortfolio();});
-              break;
-          //Калькулятор
-          case (`Калькулятор стоимости`):
-              item.addEventListener(`click`, (e) => {e.preventDefault(); toCalc();});
-              break;
-          //Команда
-          case (`Наша команда`):
-              item.addEventListener(`click`, (e) => {e.preventDefault(); toCommand();});
-              break;
-          //Вопросы
-          case (`Остались вопросы?`):
-              item.addEventListener(`click`, (e) => {e.preventDefault(); toConnect();});
-        }        
-      });
+        //Калькулятор
+        case (`Калькулятор стоимости`):
+            item.addEventListener(`click`, (e) => {e.preventDefault(); toCalc();});
+            break;
+        //Команда
+        case (`Наша команда`):
+            item.addEventListener(`click`, (e) => {e.preventDefault(); toCommand();});
+            break;
+        //Вопросы
+        case (`Остались вопросы?`):
+            item.addEventListener(`click`, (e) => {e.preventDefault(); toConnect();});
+      }        
+    });
     
-     
     donwBtn.addEventListener(`click`, (e) => { e.preventDefault(); toService(); });
      
 
