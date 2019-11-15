@@ -48,8 +48,7 @@ window.addEventListener(`DOMContentLoaded`, function(){
   //Menu
   const toggleMenu = () => {
     //получаем элементы в переменные
-    const btnMenu = document.querySelector(`.menu`),
-          menu = document.querySelector(`menu`),
+    const menu = document.querySelector(`menu`),
           menuItems = menu.querySelectorAll(`ul>li`),
           body = document.querySelector(`body`);
 
