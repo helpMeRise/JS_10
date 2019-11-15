@@ -93,6 +93,7 @@ window.addEventListener(`DOMContentLoaded`, function(){
         counter += 0.05;
         if ( counter > 1 || screen.width <= 768 ){
           cancelAnimationFrame(animate);
+          popup.style.opacity = 1;
         }
         popup.style.display = `block`;
     };

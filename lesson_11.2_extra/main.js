@@ -38,7 +38,6 @@ let inputs = document.querySelectorAll('input'),
     right = result.querySelectorAll('input'),
     all = calc.querySelectorAll('input');
     
-//
 
 class AppData {
   constructor() {
@@ -75,7 +74,6 @@ class AppData {
     this.getBudget();
     this.get(additionalIncomeItem, this.addIncome);
     this.getCancel();
-    this.getReset();
     
     this.showResult();
     this.toLocal();
@@ -96,10 +94,6 @@ class AppData {
       incomePeriodValue.value = this.calcPeriod();
     });
     
-  }
-  getReset(){
-    start.style.display = 'none';
-    reset.style.display = 'block';
   }
   getCancel(){
   
