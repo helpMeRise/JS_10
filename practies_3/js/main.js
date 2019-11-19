@@ -638,10 +638,10 @@ window.addEventListener(`DOMContentLoaded`, function(){
       const change = () => {
         animate = requestAnimationFrame(change);
         if ( count < total ) {
-          count += 25;
+          count += 5;
           totalValue.textContent = count;
         } else if ( count > total ) {
-          count -= 25;
+          count -= 5;
           totalValue.textContent = count;
         } else if( count === total ) {
           totalValue.textContent = count;
