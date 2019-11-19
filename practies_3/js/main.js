@@ -608,6 +608,7 @@ window.addEventListener(`DOMContentLoaded`, function(){
           calcDay = document.querySelector(`.calc-day`),
           calcCount = document.querySelector(`.calc-count`),
           totalValue = document.getElementById(`total`);
+          let count = 0;
 
     const countSum = () => {
       let total = 0,
@@ -632,14 +633,15 @@ window.addEventListener(`DOMContentLoaded`, function(){
 
       
 
-      //анимированное изменение цыфр
-      let animate;
-      let count = 0;
       
+      let animate;
       const change = () => {
         animate = requestAnimationFrame(change);
         if ( count < total ) {
           count += 25;
+          totalValue.textContent = count;
+        } else if ( count > total ) {
+          count -= 25;
           totalValue.textContent = count;
         } else if( count === total ) {
           totalValue.textContent = count;
@@ -647,7 +649,6 @@ window.addEventListener(`DOMContentLoaded`, function(){
         }
       };
       change();
-      
     };
 
     calcBlock.addEventListener(`change`, (event) => {
@@ -657,6 +658,11 @@ window.addEventListener(`DOMContentLoaded`, function(){
         countSum();
       }
     });
+
+    
+
+     
+
   };
   calc();
 
