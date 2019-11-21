@@ -1,9 +1,9 @@
-class Validator{
+class Validator {
     constructor({
         selector,
         pattern = {},
         method,
-    }){
+    }) {
         this.form = document.querySelector(selector);
         this.pattern = pattern;
         this.method = method;
@@ -16,12 +16,14 @@ class Validator{
     init() {
         this.applyStyle();
         this.setPattern();
-        this.elementsForm.forEach( elem => elem.addEventListener(`change`, this.chekIt.bind(this)));
+        this.elementsForm.forEach(elem => elem.addEventListener(`change`, this.chekIt.bind(this)));
         this.form.addEventListener(`submit`, e => {
             e.preventDefault();
-            if (!this.error.size && !this.elementsForm.forEach(elem => this.chekIt({target: elem}))) {
+            if (!this.error.size && !this.elementsForm.forEach(elem => this.chekIt({target: elem})) &&
+                (this.elementsForm.forEach(elem => elem.value) === '')) {
                 e.preventDefault();
-            }
+                
+            } 
         });
     }
 
@@ -40,9 +42,9 @@ class Validator{
         if (this.method) {
             const method = this.method[elem.id];
 
-        if (method) {
-            return method.every( item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
-        }
+            if (method) {
+                return method.every(item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
+            }
         }
 
         return true;
@@ -51,7 +53,7 @@ class Validator{
     chekIt(event) {
         const target = event.target;
 
-        if ( this.isValid(target)) {
+        if (this.isValid(target)) {
             this.showSuccess(target);
             this.error.delete(target);
         } else {
@@ -76,7 +78,7 @@ class Validator{
     showSuccess(elem) {
         elem.classList.remove(`error`);
         elem.classList.add(`success`);
-        if ( elem.nextElementSibling && elem.nextElementSibling.classList.contains(`validator-error`)) {
+        if (elem.nextElementSibling && elem.nextElementSibling.classList.contains(`validator-error`)) {
             elem.nextElementSibling.remove();
         }
     }
@@ -110,11 +112,11 @@ class Validator{
         if (!this.pattern.email) {
             this.pattern.email = /^\w+@\w+\.\w{2,}$/;
         }
-        
+
         if (!this.pattern.text) {
             this.pattern.text = /^[а-яА-ЯёЁ]*$/;
         }
-        
+
     }
 }
 
@@ -125,15 +127,15 @@ const valid1 = new Validator({
         'form1-phone': [
             ['notEmpty'],
             ['pattern', 'phone']
-        ],    
+        ],
         'form1-email': [
-        ['notEmpty'],
-        ['pattern', 'email']
-        ],    
+            ['notEmpty'],
+            ['pattern', 'email']
+        ],
         'form1-name': [
             ['notEmpty'],
             ['pattern', 'text']
-        ], 
+        ],
     }
 });
 valid1.init();
@@ -145,15 +147,18 @@ const valid2 = new Validator({
         'form2-phone': [
             ['notEmpty'],
             ['pattern', 'phone']
-        ],    
+        ],
         'form2-email': [
-        ['notEmpty'],
-        ['pattern', 'email']
-        ],    
+            ['notEmpty'],
+            ['pattern', 'email']
+        ],
         'form2-name': [
             ['notEmpty'],
             ['pattern', 'text']
-        ], 
+        ],
+        'form2-message': [
+            ['pattern', 'text']
+        ]
     }
 });
 valid2.init();
@@ -165,15 +170,15 @@ const valid3 = new Validator({
         'form3-phone': [
             ['notEmpty'],
             ['pattern', 'phone']
-        ],    
+        ],
         'form3-email': [
-        ['notEmpty'],
-        ['pattern', 'email']
-        ],    
+            ['notEmpty'],
+            ['pattern', 'email']
+        ],
         'form3-name': [
             ['notEmpty'],
             ['pattern', 'text']
-        ], 
+        ],
     }
 });
 valid3.init();
