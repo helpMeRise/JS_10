@@ -697,6 +697,7 @@ window.addEventListener(`DOMContentLoaded`, function () {
 
     const inputs = form.querySelectorAll(`input`);
 
+    //создаю элемент и анимирую его
     const statusMessage = document.createElement(`div`);
     statusMessage.style.cssText = `font-size: 2rem; color: yellow;`;
 
@@ -715,6 +716,7 @@ window.addEventListener(`DOMContentLoaded`, function () {
     let stop;
     form.addEventListener(`submit`, (event) => {
     event.preventDefault();
+    //проверка на валидацию
     inputs.forEach( (item) => {
       if (item.classList.contains(`error`)){
          stop = false;
@@ -736,8 +738,9 @@ window.addEventListener(`DOMContentLoaded`, function () {
     formData.forEach((val, key) => {
         body[key] = val;
     });
+    //успешная передача данных
     const apply = () => {
-      a.remove();
+      a.remove(); 
       cancelAnimationFrame(animate);
       form.appendChild(statusMessage);
       statusMessage.textContent = succesMessage;
@@ -745,6 +748,7 @@ window.addEventListener(`DOMContentLoaded`, function () {
       inputs.forEach( (item) => item.classList.remove(`success`));
     };
 
+    //неудача при попытке передачи данных
     const error = () => {
       a.remove();
       cancelAnimationFrame(animate);
