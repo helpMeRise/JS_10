@@ -26,20 +26,24 @@ const sendForm = (formId) => {
   form.addEventListener(`submit`, (event) => {
   event.preventDefault();
   //проверка на валидацию
-  inputs.forEach( (item) => {
-    if (item.classList.contains(`error`)){
+  if ( inputs[0].classList.contains(`error`) || inputs[1].classList.contains(`error`) ||
+     inputs[2].classList.contains(`error`) )  {
        stop = false;
-       return;
-    } else {
-      stop = true;
-    }
-  });
+  } 
+  if ( inputs[0].classList.contains(`success`) && inputs[1].classList.contains(`success`) &&
+  inputs[2].classList.contains(`success`) )  {
+    stop = true;
+  }
+
   if ( !stop ) {
     return false;
-  }
+  } 
+
   statusMessage.remove();
   form.appendChild(a);
   loading();
+
+  
 
   const formData = new FormData(form);
   let body = {};
