@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+
+.wrap {
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid tomato;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+  border: 1px solid #000000;
+  margin-bottom: 15px;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
